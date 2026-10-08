@@ -1,5 +1,7 @@
 name: Prueba Token
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 jobs:
   check-token:
     runs-on: self-hosted
