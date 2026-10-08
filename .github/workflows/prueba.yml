@@ -1,15 +1,12 @@
-name: Prueba Token
-on: [push]
-jobs:
-check-token:
-runs-on: self-hosted
-steps:
-- name: Comparar tokens
 run: |
-if [ "${{ secrets.DEV_TOKEN }}" = "$LOCAL_DEV_TOKEN" ]; then
-echo "Los tokens coinciden."
-exit 0
-else
-echo "Los tokens NO coinciden."
-exit 1
-fi
+  $dev = "$env:DEV_TOKEN"
+  $local = "$env:LOCAL_DEV_TOKEN"
+  Write-Host "DEV_TOKEN (longitud: $($dev.Length)): '$dev'"
+  Write-Host "LOCAL_DEV_TOKEN (longitud: $($local.Length)): '$local'"
+  if ($dev -eq $local) {
+      Write-Host "Los tokens coinciden."
+      exit 0
+  } else {
+      Write-Host "Los tokens NO coinciden."
+      exit 1
+  }
