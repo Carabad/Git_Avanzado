@@ -8,8 +8,11 @@ jobs:
         env:
           DEV_TOKEN: ${{ secrets.DEV_TOKEN }}
         run: |
+          $devToken = "$env:DEV_TOKEN"
+          $localToken = "$env:LOCAL_DEV_TOKEN"
+          
           Write-Output "Iniciando comparacion"
-          if ($env:DEV_TOKEN -eq $env:LOCAL_DEV_TOKEN) {
+          if ($devToken -eq $localToken) {
               Write-Output "Los tokens coinciden."
           } else {
               Write-Output "Los tokens NO coinciden."
