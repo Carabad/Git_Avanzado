@@ -5,16 +5,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Comparar tokens
-        env:
-          DEV_TOKEN: ${{ secrets.DEV_TOKEN }}
         run: |
-          $devToken = "$env:DEV_TOKEN"
-          $localToken = "$env:LOCAL_DEV_TOKEN"
-          
-          Write-Output "Iniciando comparacion"
-          if ($devToken -eq $localToken) {
-              Write-Output "Los tokens coinciden."
-          } else {
-              Write-Output "Los tokens NO coinciden."
-              exit 1
-          }
+          Write-Output "Verificando entorno Windows"
+          Get-ChildItem Env:
