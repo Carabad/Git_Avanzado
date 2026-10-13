@@ -1,15 +1,21 @@
 name: Prueba Token
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
 jobs:
-check-token:
-runs-on: self-hosted
-steps:
-- name: Comparar tokens
-run: |
-if [ "${{ secrets.DEV_TOKEN }}" = "$LOCAL_DEV_TOKEN" ]; then
-echo "Los tokens coinciden."
-exit 0
-else
-echo "Los tokens NO coinciden."
-exit 1
-fi
+  check-token:
+    runs-on: self-hosted
+    steps:
+      - name: Comparar tokens
+        run: |
+          $secretToken = "${{ secrets.DEV_TOKEN }}"
+          $localToken = $env:LOCAL_DEV_TOKEN
+          if ($secretToken -eq $localToken) {
+              Write-Host "Los tokens coinciden."
+              exit 0
+          } else {
+              Write-Host "Los tokens NO coinciden."
+              exit 1
+          }
